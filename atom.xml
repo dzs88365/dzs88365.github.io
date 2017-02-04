@@ -5,37 +5,521 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-04T02:07:33.417Z</updated>
+  <updated>2017-02-04T06:19:36.430Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>戴小冲</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2017/02/04/hello-world/"/>
-    <id>http://yoursite.com/2017/02/04/hello-world/</id>
-    <published>2017-02-04T02:07:33.415Z</published>
-    <updated>2017-02-04T02:07:33.417Z</updated>
+    <title>Android开发：XML简介及DOM、SAX、PULL解析对比</title>
+    <link href="http://yoursite.com/2016/03/12/Android%E5%BC%80%E5%8F%91%EF%BC%9AXML%E7%AE%80%E4%BB%8B%E5%8F%8ADOM%E3%80%81SAX%E3%80%81PULL%E8%A7%A3%E6%9E%90%E5%AF%B9%E6%AF%94/"/>
+    <id>http://yoursite.com/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/</id>
+    <published>2016-03-12T06:17:37.000Z</published>
+    <updated>2017-02-04T06:19:36.430Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <content type="html"><![CDATA[<p>定义</p>
+<p>JavaScript Object Notation，JavaScript的对象表示法，是一种轻量级的文本数据交换格式。</p>
+<p>作用<a id="more"></a></p>
+<p>用于数据的标记、存储和传输。</p>
+<p>特点</p>
+<p>轻量级的文本数据交换格式<br>独立于语言和平台<br>具有自我描述性</p>
+<p>读写速度快，解析简单<br>语法</p>
+<p>JSON值</p>
+<p>名称/值<br>数组<br>对象<br>JSON实例</p>
+<p>｛”skill”:{<br>          “web”:[<br>                 {<br>                  “name”:”html”,<br>                  “year”:”5”<br>                 },<br>                 {<br>                  “name”:”ht”,<br>                  “year”:”4”<br>                 }],<br>           “database”:[<br>                  {<br>                  “name”:”h”,<br>                  “year”:”2”<br>                 }]<br>`}}<br>“名称／值”对<br>无序、一个对象用“｛｝”包括，名称和值间用“：”相隔，对象间用“，”隔开；<br>“name”:”html”<br>对象<br>一个JSON对象包括多个名称/值对，在花括号里书写</p>
+<p>{ “name”:”html”,”year”:”5”}<br>数组<br>数组以“［］”包括，数据的对象用逗号隔开</p>
+<pre><code>{
+ &quot;name&quot;:&quot;html&quot;,
+ &quot;year&quot;:&quot;5&quot;
+},
+{
+ &quot;name&quot;:&quot;ht&quot;,
+ &quot;year&quot;:&quot;4&quot;
+}]
+</code></pre><p>web和database都是一个数组</p>
+<p>语法总结</p>
+<p>数组 [ 对象 { 值/对”” } ]</p>
+<p>数组包含对象，对象包含值/对<br>JSON解析</p>
+<p>在了解了JSON后，是时候来看下如何在Android解析JSON数据</p>
+<p>解析方法</p>
+<p>Android解析JSON数据的方法和XML解析类似，主要有两种：<br>基于事件驱动和基于文档驱动解析方式</p>
+<p>基于事件驱动</p>
+<p>主流方式：Gson解析和Jackson解析<br>Gson介绍</p>
+<p>简介：使用谷歌的开源库进行解析<br>解析方式：基于事件驱动，根据所需要取的数据通过建立一个对应于JSON数据的JavaBean类就可以通过简单的操作解析出所需JSON数据<br>Gson解析</p>
+<p>步骤1：创建一个与JSON数据对应的JavaBean类（用作存储需要解析的数据）<br>GSON解析的关键是重点是要根据json数据里面的结构写出一个对应的javaBean，规则是：</p>
+<p>JSON的大括号对应一个对象，对象里面有key和value(值)。在JavaBean里面的类属性要和key同名。<br>JSON的方括号对应一个数组，所以在JavaBeanBean里面对应的也是数组，数据里面可以有值或者对象。<br>如果数组里面只有值没有key，就说明它只是一个纯数组，如果里面有值有key，则说明是对象数组。纯数组对应JavaBean里面的数组类型，对象数组要在Bean里面建立一个内部类，类属性就是对应的对象里面的key，建立了之后要创建一个这个内部类的对象，名字对应数组名。<br>对象里面嵌套对象时候，也要建立一个内部类，和对象数组一样，这个内部类对象的名字就是父对象的key<br>注：JavaBean类里的属性不一定要全部和JSON数据里的所有key相同，可以按需取数据，也就是你想要哪种数据，就把对应的key属性写出来，注意名字一定要对应</p>
+<p>以下有两个JSON文档来说明创建JavaBean类的创建方法</p>
+<p>简单的JSON数据1（对象）</p>
+<p>String json = “{\”id\”:1,\”name\”:\”小明\”,\”sex\”:\”男\”,\”age\”:18,\”height\”:175}”;<br>步骤1：创建简单的JSON数据对应的JavaBean类</p>
+<p>package scut.learngson;</p>
+<p>public class EntityStudent {<br>    private int id;<br>    private String name;<br>    private String sex;<br>    private int age;<br>    private int height;</p>
+<pre><code>public void setId(int id){
+    this.id = id;
+}
+public void setName(String name){
+    this.name = name;
+}
+public void setSex(String sex){
+    this.sex = sex;
+}
+public void setAge(int age){
+    this.age = age;
+}
+public void setHeight(int height){
+    this.height = height;
+}
+public int getId(){
+    return id;
+}
+public String getName(){
+    return name;
+}
+public String getSex(){
+    return sex;
+}
+public int getAge(){
+    return age;
+}
+public int getHeight(){
+    return  height;
+}
+public void show(){
+            System.out.print(&quot;id=&quot; + id + &quot;,&quot;);
+            System.out.print(&quot;name=&quot; + name+&quot;,&quot;);
+            System.out.print(&quot;sex=&quot; + sex+&quot;,&quot;);
+            System.out.print(&quot;age=&quot; + age+&quot;,&quot;);
+            System.out.println(&quot;height=&quot; + height + &quot;,&quot;);
+
+}
+</code></pre><p>}<br>复杂的JSON数据（具备嵌套）</p>
+<p>{“translation”:[“车”],<br>  “basic”:<br>    {<br>      “phonetic”:”kɑː”,<br>      “explains”:[“n. 汽车；车厢”,”n. (Car)人名；(土)贾尔；(法、西)卡尔；(塞)察尔”]},<br>  “query”:”car”,<br>  “errorCode”:0,<br>  “web”:[{“value”:[“汽车”,”车子”,”小汽车”],”key”:”Car”},<br>         {“value”:[“概念车”,”概念车”,”概念汽车”],”key”:”concept car”},<br>         {“value”:[“碰碰车”,”碰撞用汽车”,”碰碰汽车”],”key”:”bumper car”}]<br>}<br>步骤1：复杂的JSON数据对应的JavaBean类</p>
+<p>package scut.httpgson;<br>import java.util.List;</p>
+<p>public class student {<br>    public String[] translation;      //[“车”]数组<br>    public basic basic;                //basic对象里面嵌套着对象，创建一个basic内部类对象<br>    public  static class basic{        //建立内部类<br>        public String phonetic;<br>        public String[] explains;<br>    }<br>    public String query;<br>    public int errorCode;<br>    public List<wb> web;            //web是一个对象数组，创建一个web内部类对象<br>    public static class wb{<br>            public String[] value;<br>            public String key;<br>        }</wb></p>
+<pre><code>public void show(){
+    //输出数组
+    for (int i = 0;i&lt;translation.length;i++)
+    {
+    System.out.println(translation[i]);
+    }
+    //输出内部类对象
+    System.out.println(basic.phonetic);
+    //输出内部类数组
+    for (int i = 0;i&lt;basic.explains.length;i++){
+        System.out.println(basic.explains[i]);
+    }
+    System.out.println(query);
+    System.out.println(errorCode);
+    for (int i = 0;i&lt;web.size();i++){
+        for(int j = 0; j&lt;web.get(i).value.length;j++)
+        {
+            System.out.println(web.get(i).value[j]);
+        }
+        System.out.println(web.get(i).key);
+    }
+}
+}
+</code></pre><p>好了，是不是觉得根据JSON文本数据去转换成JavaBean实体类很复杂呢？其实还有个简单的方法，请使用在线JSON字符串转Java实体类，哈哈请不要打我，继续往下看吧！<br>步骤2：下载并导入GSON需要的库</p>
+<p>别翻墙去谷歌官网下了，点这吧</p>
+<p>步骤3：用Gson进行转换</p>
+<p>package scut.learngson;</p>
+<p>import android.os.Bundle;<br>import android.support.v7.app.AppCompatActivity;<br>import com.google.gson.Gson;</p>
+<p>import org.json.JSONArray;<br>import org.json.JSONException;<br>import org.json.JSONObject;</p>
+<p>import java.io.BufferedReader;<br>import java.io.IOException;<br>import java.io.InputStream;<br>import java.io.InputStreamReader;</p>
+<p>public class MainActivity extends AppCompatActivity {</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Gson gson = new Gson();
+    //创建JavaBean类的对象
+  Student student = new EntityStudent();
+    String json = &quot;{\&quot;id\&quot;:1,\&quot;name\&quot;:\&quot;小明\&quot;,\&quot;sex\&quot;:\&quot;男\&quot;,\&quot;age\&quot;:18,\&quot;height\&quot;:175}&quot;;
+   //用GSON方法将JSON数据转为单个类实体
+    student = gson.fromJson(json,Student.class);
+   //调用student方法展示解析的数据
+    student.show();
+  //将Java集合转换为json
+    String json2 = gson.toJson(List);        System.out.println(json2);
+}
+</code></pre><p>}<br>总结</p>
+<p>可以看到，利用GSON方法进行解析，关键在于根据json数据里面的结构写出一个对应的javaBean，而解析过程非常简单：</p>
+<p>JavaBean对象 = gson.fromJson(son,javaBean类类名.class);<br>Jackson解析</p>
+<p>解析原理：基于事件驱动，与GSON相同，先创建一个对应于JSON数据的JavaBean类就可以通过简单的操作解析出所需JSON数据。但和Gson解析不同的是，GSON可按需解析，即创建的JavaBean类不一定完全涵盖所要解析的JSON数据，按需创建属性，但Jackson解析对应的JavaBean必须把Json数据里面的所有key都有所对应，即必须把JSON内的数据所有解析出来，无法按需解析。但Jackson的解析速度和效率都要比GSON高</p>
+<p>核心代码</p>
+<p>JSON数据</p>
+<p>{“student”:<br>          [<br>           {“id”:1,”name”:”小明”,”sex”:”男”,”age”:18,”height”:175,”date”:[2013,8,11]},<br>           {“id”:2,”name”:”小红”,”sex”:”女”,”age”:19,”height”:165,”date”:[2013,8,23]},<br>           {“id”:3,”name”:”小强”,”sex”:”男”,”age”:20,”height”:185,”date”:[2013,9,1]}<br>          ],<br>  “grade”:”2”<br>}<br>步骤1：建立对应的javaBean：</p>
+<p>建立javaBean的对应规则和GSON一样</p>
+<p>package scut.learnjackson;</p>
+<p>import java.util.ArrayList;<br>import java.util.List;<br>class test {<br>    private  List<stu> student = new ArrayList<stu>();</stu></stu></p>
+<pre><code>private  int grade;
+
+public void setStudent(List&lt;stu&gt; student){
+    this.student = student;
+}
+public List&lt;stu&gt; getStudent(){
+    return student;
+}
+public void setGrade(int grade){
+    this.grade = grade;
+}
+public int getGrade(){
+    return grade;
+}
+private static class stu {
+    private  int id;
+    private  String name;
+    private  String sex;
+    private  int age;
+    private  int height;
+    private  int[] date;
+
+    public void setId(int id){
+        this.id = id;
+    }
+    public int getId(){
+        return id;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return  name;
+    }
+    public void setSex(String sex){
+        this.sex = sex;
+    }
+    public String getSex(){
+        return sex;
+    }
+    public void  setAge(int age){
+        this.age = age;
+    }
+    public int getAge(){
+        return age;
+    }
+    public void setHeight(int height){
+        this.height = height;
+    }
+    public int getHeight(){
+        return height;
+    }
+    public void setDate(int[] date){
+        this.date = date;
+    }
+    public int[] getDate(){
+        return date;
+    }
+}
+
+public String tostring(){
+    String str = &quot;&quot;;
+    for (int i = 0;i&lt;student.size();i++){
+        str += student.get(i).getId() + &quot; &quot; + student.get(i).getName() + &quot; &quot; + student.get(i).getSex() + &quot; &quot; + student.get(i).getAge() + &quot; &quot; + student.get(i).getHeight() ;
+        for (int j = 0;j&lt;student.get(i).getDate().length;j++) {
+            str += student.get(i).getDate()[j]+ &quot; &quot; ;
+        }
+        str += &quot;\n&quot;;
+    }
+    str += &quot;\n&quot;+getGrade();
+    return str;
+}
+</code></pre><p>}<br>步骤2：利用Jackson方法进行解析</p>
+<p>package scut.learnjackson;</p>
+<p>import android.os.Bundle;<br>import android.support.v7.app.AppCompatActivity;<br>import org.codehaus.jackson.map.ObjectMapper;<br>import java.io.BufferedReader;<br>import java.io.IOException;<br>import java.io.InputStreamReader;</p>
+<p>public class MainActivity extends AppCompatActivity {<br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        ObjectMapper objectMapper = new ObjectMapper();<br>        try {<br>            InputStreamReader isr = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(“assets/“ + “student.json”),”utf-8”);<br>            //从assets获取json文件<br>            BufferedReader bfr = new BufferedReader(isr);<br>            String line;<br>            StringBuilder stringBuilder = new StringBuilder();<br>            while ((line = bfr.readLine())!=null){<br>                stringBuilder.append(line);<br>            }//将JSON数据转化为字符串<br>            System.out.println(stringBuilder.toString());<br>            System.out.println(tes.tostring());</p>
+<pre><code>    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+}
+</code></pre><p>}<br>基于文档驱动解析方式</p>
+<p>主流方式：Android Studio自带org.json解析<br>解析方式：基于文档驱动，类似于XML的DOM解析方法，先把全部文件读入到内存中，然后遍历所有数据，然后根据需要检索想要的数据。<br>需要解析的JSON数据：</p>
+<p>{<br>“student”:[<br>               {“id”:1,”name”:”小明”,”sex”:”男”,”age”:18,”height”:175},<br>              {“id”:2,”name”:”小红”,”sex”:”女”,”age”:19,”height”:165},<br>               {“id”:3,”name”:”小强”,”sex”:”男”,”age”:20,”height”:185}<br>            ],<br>“cat”:”it”<br>}<br>读入本地assets文件夹里面的student.son并解析</p>
+<p>package scut.learngson;</p>
+<p>import android.os.Bundle;<br>import org.json.JSONArray;<br>import org.json.JSONException;<br>import org.json.JSONObject;</p>
+<p>import java.io.BufferedReader;<br>import java.io.IOException;<br>import java.io.InputStream;<br>import java.io.InputStreamReader;</p>
+<p>public class MainActivity extends AppCompatActivity {</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    EntityStudent student = new EntityStudent();
+
+
+    try {
+        //从assets获取json文件
+        InputStreamReader isr = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(&quot;assets/&quot; + &quot;student.json&quot;));
+        //字节流转字符流
+       BufferedReader bfr = new BufferedReader(isr);
+        String line ;
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((line = bfr.readLine())!=null){
+            stringBuilder.append(line);
+        }//将JSON数据转化为字符串
+        JSONObject root = new JSONObject(stringBuilder.toString());
+        //根据键名获取键值信息
+        System.out.println(&quot;root:&quot;+root.getString(&quot;cat&quot;));
+        JSONArray array = root.getJSONArray(&quot;student&quot;);
+        for (int i = 0;i &lt; array.length();i++)
+        {
+            JSONObject stud = array.getJSONObject(i);
+            System.out.println(&quot;------------------&quot;);
+            System.out.print(&quot;id=&quot;+stud.getInt(&quot;id&quot;)+ &quot;,&quot;));
+            System.out.print(&quot;name=&quot;+stud.getString(&quot;name&quot;)+ &quot;,&quot;));
+            System.out.print(&quot;sex=&quot;+stud.getString(&quot;sex&quot;)+ &quot;,&quot;));
+            System.out.print(&quot;age=&quot;+stud.getInt(&quot;age&quot;)+ &quot;,&quot;));
+            System.out.println(&quot;height=&quot;+stud.getInt(&quot;height&quot;)+ &quot;,&quot;));
+            bfr.close();
+                isr.close();
+            is.close();//依次关闭流
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+
+}
+</code></pre><p>}<br>GSON、Jackson、Android Studio自带org.son解析三类方式对比</p>
+<p>Android Studio自带org.json</p>
+<p>原理：基于文档驱动<br>特点：<br>优点：无<br>缺点：解析 XML 文件时会将整个 XML 文件的内容解析成树型结构存放在内存中并创建新对象，比较消耗时间和内存,解析速度和效率慢，解析方式和性能完败GSON<br>GSON方式</p>
+<p>原理：基于事件驱动<br>特点：<br>优点：解析方法简单、解析效率高、占存少、灵活性高<br>使用情境<br>适用于需要处理大型 JSON文档、JSON文档结构复杂的场合<br>Jackson方式</p>
+<p>原理：基于事件驱动<br>特点：<br>优点：解析效率最高、在数据量大的情况优势尤为明显、占存少<br>缺点：必须完全解析文档，如果要按需解析的话可以拆分Json来读取，操作和解析方法复杂；<br>使用情境<br>适用于需要处理超大型JSON文档、不需要对JSON文档进行按需解析、、性能要求较高的场合<br>与XML解析对比</p>
+<p>对于同样作为主流的数据交换格式来说，JSON相比于XML，JSON文档大小更加小，解析方法更加简单、读写速度更快，所以JSON一定是你在数据交换格式的选型中的首选。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;定义&lt;/p&gt;
+&lt;p&gt;JavaScript Object Notation，JavaScript的对象表示法，是一种轻量级的文本数据交换格式。&lt;/p&gt;
+&lt;p&gt;作用
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ListView与Recycler区别</title>
+    <link href="http://yoursite.com/2016/01/05/ListView%E4%B8%8ERecycler%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2016/01/05/ListView与Recycler区别/</id>
+    <published>2016-01-05T05:29:37.000Z</published>
+    <updated>2017-02-04T05:46:06.300Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天这篇文章主要是向大家介绍 RecyclerView 和 ListView 的使用对比，文章主要包括以下几点的内容：</p>
+<p>RecyclerView 和 ListView 布局效果的对比<br><a id="more"></a><br>RecyclerView 和 ListView 一些常用的功能 和 API 的对比</p>
+<p>RecyclerView 和 ListView 在 Android L 引入嵌套滚动机制之后的对比<br>有一点需要强调下，文中所有的效果在真机上都是很流畅的，因为录制 GIF 图很容易掉帧，所以特地放慢了操作，千万不要误会成卡顿了啊！</p>
+<p>布局效果对比</p>
+<p>作为一枚控件，要引起开发者使用的欲望自然先是从显示效果看起（看脸的世界），ListView 大家对效果已经很熟悉了，这里直接跳过，而作为 RecyclerView，它能带给效果要比 ListView 强大得多<br>Android 默认提供的 RecyclerView 就能支持 线性布局、网格布局、瀑布流布局 三种（这里我们暂且不提代码细节，后文再说），而且同时还能够控制横向还是纵向滚动。怎样，从效果上足以碾压 ListView 有木有。</p>
+<p>横向滚动的ListView开源控件是不是可以不用再找了？对，你没看错！<br>瀑布流效果的开源控件是不是可以不用再找了？对，你没看错！<br>连横向滚动的GridView都不用找了！对，你没看错！<br>到此，展示效果上的差距一目了然。</p>
+<p>API 使用对比</p>
+<p>当然，一个控件我们不能完全只看效果，关键还是要看实用性，看看有没有方便我们调用的 API提高我们的开发效率。所以，接下来我们就从各个方面来看看 RecyclerView 和 ListView 在提供的API调用上的一些实践比较。</p>
+<p>基础使用</p>
+<p>ListView 的基础使用大家再熟悉不过，其使用的关键点主要如下：</p>
+<p>继承重写 BaseAdapter 类<br>自定义 ViewHolder 和 convertView 一起完成复用优化工作<br>由于 ListView 已经老生常谈，所以此处就不去写示例代码了。 RecyclerView 基础使用关键点同样有两点：</p>
+<p>继承重写 RecyclerView.Adapter 和 RecyclerView.ViewHolder<br>设置布局管理器，控制布局效果<br>示例代码大致如下：</p>
+<p>// 第一步：继承重写 RecyclerView.Adapter 和 RecyclerView.ViewHolder<br>public class AuthorRecyclerAdapter extends RecyclerView.Adapter<authorrecycleradapter.authorviewholder> {</authorrecycleradapter.authorviewholder></p>
+<pre><code>...
+
+@Override
+public AuthorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    ...
+    return viewHolder;
+}
+
+@Override
+public void onBindViewHolder(AuthorViewHolder holder, int position) {
+    ...
+}
+
+@Override
+public int getItemCount() {
+    if (mData == null) {
+        return 0;
+    }
+    return mData.size();
+}
+
+class AuthorViewHolder extends RecyclerView.ViewHolder {
+
+    ...
+
+    public AuthorViewHolder(View itemView) {
+        super(itemView);
+        ...
+
+    }
+}
+</code></pre><p>}</p>
+<p>mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);<br>mRecyclerAdapter = new AuthorRecyclerAdapter(mData);</p>
+<p>// 第二步：设置布局管理器，控制布局效果<br>LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecyclerDemoActivity.this);<br>linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);<br>mRecyclerView.setLayoutManager(linearLayoutManager);</p>
+<p>mRecyclerView.setAdapter(mRecyclerAdapter);<br>从基础使用上看，我们明显可以看出，RecyclerView 相比 ListView 在基础使用上的区别主要有如下几点：</p>
+<p>ViewHolder 的编写规范化了<br>RecyclerView 复用 Item 的工作 Google 全帮你搞定，不再需要像 ListView 那样自己调用 setTag<br>RecyclerView 需要多出一步 LayoutManager 的设置工作<br>布局效果</p>
+<p>在最开始就提到，RecyclerView 能够支持各种各样的布局效果，这是 ListView 所不具有的功能，那么这个功能如何实现的呢？其核心关键在于 RecyclerView.LayoutManager 类中。从前面的基础使用可以看到，RecyclerView 在使用过程中要比 ListView 多一个 setLayoutManager 步骤，这个 LayoutManager 就是用于控制我们 RecyclerView 最终的展示效果的。<br>而 LayoutManager 只是一个抽象类而已，系统已经为我们提供了三个相关的实现类 LinearLayoutManager（线性布局效果）、GridLayoutManager（网格布局效果）、StaggeredGridLayoutManager（瀑布流布局效果）。如果你想用 RecyclerView 来实现自己 YY 出来的一种效果，则应该去继承实现自己的 LayoutManager，并重写相应的方法，而不应该想着去改写 RecyclerView。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天这篇文章主要是向大家介绍 RecyclerView 和 ListView 的使用对比，文章主要包括以下几点的内容：&lt;/p&gt;
+&lt;p&gt;RecyclerView 和 ListView 布局效果的对比&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Looper、Handler、MessageQueue,Message作用和存在的意义？</title>
+    <link href="http://yoursite.com/2015/10/03/Looper%E3%80%81Handler%E3%80%81MessageQueue-Message%E4%BD%9C%E7%94%A8%E5%92%8C%E5%AD%98%E5%9C%A8%E7%9A%84%E6%84%8F%E4%B9%89%EF%BC%9F/"/>
+    <id>http://yoursite.com/2015/10/03/Looper、Handler、MessageQueue-Message作用和存在的意义？/</id>
+    <published>2015-10-03T06:39:41.000Z</published>
+    <updated>2017-02-04T06:41:04.288Z</updated>
+    
+    <content type="html"><![CDATA[<p>Looper</p>
+<p>我们知道一个线程是一段可执行的代码，当可执行代码执行完成后，线程生命周期便会终止，线程就会退出，<a id="more"></a>那么做为App的主线程，如果代码段执行完了会怎样？那么就会出现App启动后执行一段代码后就自动退出了，这是很不合理的。所以为了防止代码段被执行完，只能在代码中插入一个死循环，那么代码就不会被执行完，然后自动退出，怎么在在代码中插入一个死循环呢？那么Looper出现了，在主线程中调用Looper.prepare()…Looper.loop()就会变当前线程变成Looper线程（可以先简单理解：无限循环不退出的线程），Looper.loop()方法里面有一段死循环的代码，所以主线程会进入while(true){…}的代码段跳不出来，但是主线程也不能什么都不做吧？其实所有做的事情都在while(true){…}里面做了，主线程会在死循环中不断等其他线程给它发消息（消息包括：Activity启动，生命周期，更新UI，控件事件等），一有消息就根据消息做相应的处理，Looper的另外一部分工作就是在循环代码中会不断从消息队列挨个拿出消息给主线程处理。</p>
+<p>MessageQueue</p>
+<p>MessageQueue 存在的原因很简单，就是同一线程在同一时间只能处理一个消息，同一线程代码执行是不具有并发性，所以需要队列来保存消息和安排每个消息的处理顺序。多个其他线程往UI线程发送消息，UI线程必须把这些消息保持到一个列表（它同一时间不能处理那么多任务),然后挨个拿出来处理，这种设计很简单，我们平时写代码其实也经常这么做。每一个Looper线程都会维护这样一个队列，而且仅此一个，这个队列的消息只能由该线程处理。</p>
+<p>Handler</p>
+<p>简单说Handler用于同一个进程的线程间通信。Looper让主线程无限循环地从自己的MessageQueue拿出消息处理，既然这样我们就知道处理消息肯定是在主线程中处理的，那么怎样在其他的线程往主线程的队列里放入消息呢？其实很简单，我们知道在同一进程中线程和线程之间资源是共享的，也就是对于任何变量在任何线程都是可以访问和修改的，只要考虑并发性做好同步就行了，那么只要拿到MessageQueue 的实例，就可以往主线程的MessageQueue放入消息，主线程在轮询的时候就会在主线程处理这个消息。那么怎么拿到主线程 MessageQueue的实例，是可以拿到的(在主线程下mLooper = Looper.myLooper();mQueue = mLooper.mQueue;),但是Google 为了统一添加消息和消息的回调处理，又专门构建了Handler类，你只要在主线程构建Handler类，那么这个Handler实例就获取主线程MessageQueue实例的引用（获取方式mLooper = Looper.myLooper();mQueue = mLooper.mQueue;），Handler 在sendMessage的时候就通过这个引用往消息队列里插入新消息。Handler 的另外一个作用，就是能统一处理消息的回调。这样一个Handler发出消息又确保消息处理也是自己来做，这样的设计非常的赞。具体做法就是在队列里面的Message持有Handler的引用（哪个handler 把它放到队列里，message就持有了这个handler的引用），然后等到主线程轮询到这个message的时候，就来回调我们经常重写的Handler的handleMessage(Message msg)方法。</p>
+<p>Message</p>
+<p>Message 很简单了，你想让主线程做什么事，总要告诉它吧，总要传递点数据给它吧，Message就是这个载体。</p>
+<p>源码分析</p>
+<p>接下来我们会结合App主线程（UI线程）来讲解，从App启动后一步一步往下走分析整个Android的消息处理机制，首先在</p>
+<p>ActivityThread类有我们熟悉的main的函数，App启动的代码的入口就在这里，UI线程本来只是一个普通线程，在这里会把UI线程转换成</p>
+<p>Looper线程，什么是Looper线程，不急往下看就知道了。</p>
+<p>publicfinalclassActivityThread{publicstaticfinalvoidmain(String[] args){       </p>
+<p>……        Looper.prepareMainLooper();      </p>
+<p> ……        ActivityThread thread =newActivityThread();       </p>
+<p>thread.attach(false);</p>
+<p>if(sMainThreadHandler ==null) {     </p>
+<pre><code>sMainThreadHandler = thread.getHandler();     
+</code></pre><p>  }       </p>
+<p>……        Looper.loop();        ……   </p>
+<p>}}</p>
+<p>首先执行的是Looper.prepareMainLooper()我们来看下Looper里面的这个方法做了什么？</p>
+<p>注:看之前先稍微了解下ThreadLocal是什么？</p>
+<p>ThreadLocal： 线程本地存储区（Thread Local Storage，简称为TLS），每个线程都有自己的私有的本地存储区域，不同线程之间彼此不能访问对方的TLS区域。这里线程自己的本地存储区域存放是线程自己的Looper。具体看下ThreadLocal.java 的源码！</p>
+<p>publicfinalclassLooper{</p>
+<p>// sThreadLocal 是static的变量，可以先简单理解它相当于map，key是线程，value是Looper，</p>
+<p>//那么你只要用当前的线程就能通过sThreadLocal获取当前线程所属的Looper。staticfinalThreadLocal sThreadLocal =newThreadLocal();//主线程（UI线程）的Looper 单独处理，是static类型的，通过下面的方法getMainLooper()//可以方便的获取主线程的Looper。privatestaticLooper sMainLooper;//Looper 所属的线程的消息队列finalMessageQueue mQueue;//Looper 所属的线程finalThread mThread;publicstaticvoidprepare(){       </p>
+<p>prepare(true);    }</p>
+<p>privatestaticvoidprepare(booleanquitAllowed){//如果线程的TLS已有数据，则会抛出异常，一个线程只能有一个Looper，prepare不能重复调用。</p>
+<p>if(sThreadLocal.get() !=null) {</p>
+<p>thrownewRuntimeException(“Only one Looper may be created per thread”);        }</p>
+<p>//往线程的TLS插入数据，简单理解相当于map.put(Thread.currentThread(),new Looper(quitAllowed));sThreadLocal.set(newLooper(quitAllowed));    }//实际上是调用  prepare(false)，并然后给sMainLooper赋值。</p>
+<p>publicstaticvoidprepareMainLooper(){      </p>
+<p>  prepare(false);synchronized(Looper.class) {</p>
+<p>if(sMainLooper !=null) {</p>
+<p>thrownewIllegalStateException(“The main Looper has already been prepared.”);        </p>
+<pre><code>}            sMainLooper = myLooper();      
+</code></pre><p>  }    }//static 方法，方便获取主线程的</p>
+<p>Looper.publicstaticLoopergetMainLooper(){</p>
+<p>synchronized(Looper.class) {returnsMainLooper;      </p>
+<p>  }    }</p>
+<p>publicstatic@NullableLoopermyLooper(){//具体看ThreadLocal类的源码的get方法，//简单理解相当于map.get(Thread.currentThread()) 获取当前线程的LooperreturnsThreadLocal.get();    }}</p>
+<p>看了上面的代码（仔细看下注释），我们发现Looper.prepareMainLooper()做的事件就是new了一个Looper实例并放入Looper类下面一个static的ThreadLocal sThreadLocal静态变量中，同时给sMainLooper赋值,给sMainLooper赋值是为了方便通过Looper.getMainLooper()快速获取主线程的Looper，sMainLooper是主线程的Looper可能获取会比较频繁，避免每次都到 sThreadLocal 去查找获取。</p>
+<p>接下来重点是看下Looper的构造函数，看看在new Looper的时候做了什么事？</p>
+<p>privateLooper(booleanquitAllowed){       </p>
+<p>mQueue =newMessageQueue(quitAllowed);        </p>
+<p>mThread = Thread.currentThread();}</p>
+<p>看到没有，这时候给当前线程创建了消息队列MessageQueue，并且让Looper持有MessageQueue的引用。执行完Looper.prepareMainLooper()之后，主线程从普通线程转成一个Looper线程。目前的主线程线程已经有一个Looper对象和一个消息队列mQueue,引用关系如下图：（主线程可以轻松获取它的Looper，主线程的Looper持有主线程消息队列的引用）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Looper&lt;/p&gt;
+&lt;p&gt;我们知道一个线程是一段可执行的代码，当可执行代码执行完成后，线程生命周期便会终止，线程就会退出，
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>android的消息机制——Handler机制</title>
+    <link href="http://yoursite.com/2015/09/04/android%E7%9A%84%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6%E2%80%94%E2%80%94Handler%E6%9C%BA%E5%88%B6/"/>
+    <id>http://yoursite.com/2015/09/04/android的消息机制——Handler机制/</id>
+    <published>2015-09-04T06:22:09.000Z</published>
+    <updated>2017-02-04T06:24:27.359Z</updated>
+    
+    <content type="html"><![CDATA[<p>能简单说得我们尽量不复杂：</p>
+<p>为了避免ANR，我们会通常把 耗时操作放在子线程里面去执行，因为子线程不能更新UI，所以当子线程<a id="more"></a>需要更新的UI的时候就需要借助到安卓的消息机制，也就是Handler机制了。</p>
+<p>注意：在安卓的世界里面，当 子线程 在执行耗时操作的时候，不是说你的主线程就阻塞在那里等待子线程的完成——也不是调用 Thread.wait()或是Thread.sleep()。安卓采取的方法是，主线程应该为子线程提供一个Handler，以便完成时能够提交给主线程。以这种方式设计你的应用程序，将能保证你的主线程保持对输入的响应性并能避免由于5秒输入事件的超时引发的ANR对话框。<br>一个程序的运行，就是一个进程的在执行，一个进程里面可以拥有很多个线程。</p>
+<p>主线程：也叫UI线程，或称ActivityThread，用于运行四大组件和处理他们用户的交互。 ActivityThread管理应用进程的主线程的执行(相当于普通Java程序的main入口函数)，在Android系统中，在默认情况下，一个应用程序内的各个组件(如Activity、BroadcastReceiver、Service)都会在同一个进程(Process)里执行，且由此进程的主线程负责执行。<br>ActivityThread既要处理Activity组件的UI事件，又要处理Service后台服务工作，通常会忙不过来。为了解决此问题，主线程可以创建多个子线程来处理后台服务工作，而本身专心处理UI画面的事件。<br>。</p>
+<p>子线程： 用于执行耗时操作，比如 I/O操作和网络请求等。（安卓3.0以后要求耗访问网络必须在子线程种执行）更新UI的工作必须交给主线程，子线程在安卓里是不允许更新UI的。<br>一、 基本概念</p>
+<p>什么是消息机制？ —— 不同线程之间的通信。</p>
+<p>什么安卓的消息机制，就是 Handler 运行机制。</p>
+<p>安卓的消息机制有什么用？ —— 避免ANR(Application Not Responding) ，一旦发生ANR，程序就挂了，奔溃了。</p>
+<p>什么时候会触发ANR？（消息机制在什么时候用？） —— 以下两个条件任意一个触发的的时候就会发生ANR</p>
+<p>在activity中超过5秒的时间未能响应下一个事件<br>BroadcastReceive超过10未响应<br>造成以上两点的原因有很多，比如网络请求, 大文件的读取, 耗时的计算等都会引发ANR</p>
+<p>如何避免ANR<br>首先明白两点：</p>
+<p>主线程不能执行耗时操作（避免ANR）<br>子线程不能直接更新UI界面<br>结合起来这两点的解决办法是：把耗时操作放到子线程去执行，然后使用Handler去更新UI<br>注意：在安卓的世界里面，当 子线程 在执行耗时操作的时候，不是说你的主线程就阻塞在那里等待子线程的完成——也不是调用 Thread.wait()或是Thread.sleep()。安卓采取的方法是，主线程应该为子线程提供一个Handler，以便完成时能够提交给主线程。以这种方式设计你的应用程序，将能保证你的主线程保持对输入的响应性并能避免由于5秒输入事件的超时引发的ANR对话框。</p>
+<p>网络请求, 大文件的读取, 复杂的计算等等这些都是耗时操作，耗时操作都应该写在子线程，但是安卓说了，除了主线程谁都不许更改UI，如果子线程更改UI，就会报出如下错误</p>
+<p>android.view.ViewRootImpl$CalledFromWrongThreadException:<br>Only the original thread that created a view hierarchy can touch its views.<br>大概就是说，谁创建的View说更改，别人（子线程）少管闲事。</p>
+<p>为什么系统不允许子线程更新UI<br>因为的UI控件不是线程安全的。<br>如果在多线程中并发访问可能会导致UI控件处于不可预期的状态，那为什么不对UI控件的访问加上 上锁机制 呢？因为有这么两个缺点：</p>
+<p>上锁会让UI控件变得复杂和低效<br>上锁后会阻塞某些进程的执行<br>对于手机系统来说，这两个缺点是不可接受的，所以最简单高效的方法就是 —— 采用单线程模型来处理UI操作。<br>对开发者而言也不是很麻烦，只是通过Handler切换一下访问的线程的就好。<br>如何手动制造一个ANR呢<br>在Activitynew一个子线程。睡眠5秒以上，就可以啦。</p>
+<p>public class MainActivity extends Activity {</p>
+<pre><code>private TextView mTv;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    mTv= (TextView) findViewById(R.id.mTv);
+    mTv.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d(&quot;Test&quot;, &quot;点击文字&quot;);
+            try {
+                Thread.sleep(300000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    });
+
+}
+</code></pre><p>}<br>如何演示子线程不能更改界面呢<br>给一个TextView弄一个点击事件，点击后new一个Thread，在这个线程的run()方法更改TextView的文字，这样就属于更改UI了，所以，不行了，挂了。</p>
+<p>public class MainActivity extends Activity {</p>
+<pre><code>private TextView mTv;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    mTv= (TextView) findViewById(R.id.mTv);
+    mTv.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d(&quot;Test&quot;, &quot;点击文字&quot;);
+            sonThreadUpdateUi();
+
+        }
+    });
+
+}
+
+private void sonThreadUpdateUi(){
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            mTv.setText(&quot;子线程想要更改界面&quot;);
+        }
+    }).start();
+}
+</code></pre><p>}</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;能简单说得我们尽量不复杂：&lt;/p&gt;
+&lt;p&gt;为了避免ANR，我们会通常把 耗时操作放在子线程里面去执行，因为子线程不能更新UI，所以当子线程
     
     </summary>
     

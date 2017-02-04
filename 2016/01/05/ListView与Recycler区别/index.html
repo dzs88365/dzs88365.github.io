@@ -15,12 +15,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta name="description" content="今天这篇文章主要是向大家介绍 RecyclerView 和 ListView 的使用对比，文章主要包括以下几点的内容：
+RecyclerView 和 ListView 布局效果的对比">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ListView与Recycler区别">
+<meta property="og:url" content="http://yoursite.com/2016/01/05/ListView与Recycler区别/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天这篇文章主要是向大家介绍 RecyclerView 和 ListView 的使用对比，文章主要包括以下几点的内容：
+RecyclerView 和 ListView 布局效果的对比">
+<meta property="og:updated_time" content="2017-02-04T05:46:06.300Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="ListView与Recycler区别">
+<meta name="twitter:description" content="今天这篇文章主要是向大家介绍 RecyclerView 和 ListView 的使用对比，文章主要包括以下几点的内容：
+RecyclerView 和 ListView 布局效果的对比">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives | Hexo</title>
+<title>ListView与Recycler区别 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -62,8 +69,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -252,149 +259,217 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-ListView与Recycler区别" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/" class="archive-article-date">
-      <time datetime="2016-03-12T06:17:37.000Z" itemprop="datePublished">03-12</time>
+    <div class="article-meta">
+      <a href="/2016/01/05/ListView与Recycler区别/" class="article-date">
+      <time datetime="2016-01-05T05:29:37.000Z" itemprop="datePublished">2016-01-05</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/">Android开发：XML简介及DOM、SAX、PULL解析对比</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ListView与Recycler区别
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/01/05/ListView与Recycler区别/" class="archive-article-date">
-      <time datetime="2016-01-05T05:29:37.000Z" itemprop="datePublished">01-05</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/05/ListView与Recycler区别/">ListView与Recycler区别</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+      </header>
       
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/10/03/Looper、Handler、MessageQueue-Message作用和存在的意义？/" class="archive-article-date">
-      <time datetime="2015-10-03T06:39:41.000Z" itemprop="datePublished">10-03</time>
-</a>
+      <div class="article-info article-info-post">
+        
 
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/03/Looper、Handler、MessageQueue-Message作用和存在的意义？/">Looper、Handler、MessageQueue,Message作用和存在的意义？</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
+        
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+      </div>
+      
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/09/04/android的消息机制——Handler机制/" class="archive-article-date">
-      <time datetime="2015-09-04T06:22:09.000Z" itemprop="datePublished">09-04</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/04/android的消息机制——Handler机制/">android的消息机制——Handler机制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
+    <div class="article-entry" itemprop="articleBody">
+      
           
+        <p>今天这篇文章主要是向大家介绍 RecyclerView 和 ListView 的使用对比，文章主要包括以下几点的内容：</p>
+<p>RecyclerView 和 ListView 布局效果的对比<br><a id="more"></a><br>RecyclerView 和 ListView 一些常用的功能 和 API 的对比</p>
+<p>RecyclerView 和 ListView 在 Android L 引入嵌套滚动机制之后的对比<br>有一点需要强调下，文中所有的效果在真机上都是很流畅的，因为录制 GIF 图很容易掉帧，所以特地放慢了操作，千万不要误会成卡顿了啊！</p>
+<p>布局效果对比</p>
+<p>作为一枚控件，要引起开发者使用的欲望自然先是从显示效果看起（看脸的世界），ListView 大家对效果已经很熟悉了，这里直接跳过，而作为 RecyclerView，它能带给效果要比 ListView 强大得多<br>Android 默认提供的 RecyclerView 就能支持 线性布局、网格布局、瀑布流布局 三种（这里我们暂且不提代码细节，后文再说），而且同时还能够控制横向还是纵向滚动。怎样，从效果上足以碾压 ListView 有木有。</p>
+<p>横向滚动的ListView开源控件是不是可以不用再找了？对，你没看错！<br>瀑布流效果的开源控件是不是可以不用再找了？对，你没看错！<br>连横向滚动的GridView都不用找了！对，你没看错！<br>到此，展示效果上的差距一目了然。</p>
+<p>API 使用对比</p>
+<p>当然，一个控件我们不能完全只看效果，关键还是要看实用性，看看有没有方便我们调用的 API提高我们的开发效率。所以，接下来我们就从各个方面来看看 RecyclerView 和 ListView 在提供的API调用上的一些实践比较。</p>
+<p>基础使用</p>
+<p>ListView 的基础使用大家再熟悉不过，其使用的关键点主要如下：</p>
+<p>继承重写 BaseAdapter 类<br>自定义 ViewHolder 和 convertView 一起完成复用优化工作<br>由于 ListView 已经老生常谈，所以此处就不去写示例代码了。 RecyclerView 基础使用关键点同样有两点：</p>
+<p>继承重写 RecyclerView.Adapter 和 RecyclerView.ViewHolder<br>设置布局管理器，控制布局效果<br>示例代码大致如下：</p>
+<p>// 第一步：继承重写 RecyclerView.Adapter 和 RecyclerView.ViewHolder<br>public class AuthorRecyclerAdapter extends RecyclerView.Adapter<authorrecycleradapter.authorviewholder> {</authorrecycleradapter.authorviewholder></p>
+<pre><code>...
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
+@Override
+public AuthorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    ...
+    return viewHolder;
+}
+
+@Override
+public void onBindViewHolder(AuthorViewHolder holder, int position) {
+    ...
+}
+
+@Override
+public int getItemCount() {
+    if (mData == null) {
+        return 0;
+    }
+    return mData.size();
+}
+
+class AuthorViewHolder extends RecyclerView.ViewHolder {
+
+    ...
+
+    public AuthorViewHolder(View itemView) {
+        super(itemView);
+        ...
+
+    }
+}
+</code></pre><p>}</p>
+<p>mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);<br>mRecyclerAdapter = new AuthorRecyclerAdapter(mData);</p>
+<p>// 第二步：设置布局管理器，控制布局效果<br>LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecyclerDemoActivity.this);<br>linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);<br>mRecyclerView.setLayoutManager(linearLayoutManager);</p>
+<p>mRecyclerView.setAdapter(mRecyclerAdapter);<br>从基础使用上看，我们明显可以看出，RecyclerView 相比 ListView 在基础使用上的区别主要有如下几点：</p>
+<p>ViewHolder 的编写规范化了<br>RecyclerView 复用 Item 的工作 Google 全帮你搞定，不再需要像 ListView 那样自己调用 setTag<br>RecyclerView 需要多出一步 LayoutManager 的设置工作<br>布局效果</p>
+<p>在最开始就提到，RecyclerView 能够支持各种各样的布局效果，这是 ListView 所不具有的功能，那么这个功能如何实现的呢？其核心关键在于 RecyclerView.LayoutManager 类中。从前面的基础使用可以看到，RecyclerView 在使用过程中要比 ListView 多一个 setLayoutManager 步骤，这个 LayoutManager 就是用于控制我们 RecyclerView 最终的展示效果的。<br>而 LayoutManager 只是一个抽象类而已，系统已经为我们提供了三个相关的实现类 LinearLayoutManager（线性布局效果）、GridLayoutManager（网格布局效果）、StaggeredGridLayoutManager（瀑布流布局效果）。如果你想用 RecyclerView 来实现自己 YY 出来的一种效果，则应该去继承实现自己的 LayoutManager，并重写相应的方法，而不应该想着去改写 RecyclerView。</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/01/05/ListView与Recycler区别/">ListView与Recycler区别</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">戴小冲</a></p>
+        <p><span>发布时间:</span>2016-01-05, 13:29:37</p>
+        <p><span>最后更新:</span>2017-02-04, 13:46:06</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/01/05/ListView与Recycler区别/" title="ListView与Recycler区别">http://yoursite.com/2016/01/05/ListView与Recycler区别/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/01/05/ListView与Recycler区别/　　作者: 戴小冲" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/">
+                    Android开发：XML简介及DOM、SAX、PULL解析对比
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/10/03/Looper、Handler、MessageQueue-Message作用和存在的意义？/">
+                    Looper、Handler、MessageQueue,Message作用和存在的意义？
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"ListView与Recycler区别　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/" title="上一篇: Android开发：XML简介及DOM、SAX、PULL解析对比">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/10/03/Looper、Handler、MessageQueue-Message作用和存在的意义？/" title="下一篇: Looper、Handler、MessageQueue,Message作用和存在的意义？">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/">Android开发：XML简介及DOM、SAX、PULL解析对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/05/ListView与Recycler区别/">ListView与Recycler区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/03/Looper、Handler、MessageQueue-Message作用和存在的意义？/">Looper、Handler、MessageQueue,Message作用和存在的意义？</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/04/android的消息机制——Handler机制/">android的消息机制——Handler机制</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">

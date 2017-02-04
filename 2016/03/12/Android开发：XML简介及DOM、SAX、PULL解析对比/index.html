@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="戴小冲" />
+
+
+
+<meta name="description" content="定义
+JavaScript Object Notation，JavaScript的对象表示法，是一种轻量级的文本数据交换格式。
+作用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发：XML简介及DOM、SAX、PULL解析对比">
+<meta property="og:url" content="http://yoursite.com/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="定义
+JavaScript Object Notation，JavaScript的对象表示法，是一种轻量级的文本数据交换格式。
+作用">
+<meta property="og:updated_time" content="2017-02-04T06:19:36.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发：XML简介及DOM、SAX、PULL解析对比">
+<meta name="twitter:description" content="定义
+JavaScript Object Notation，JavaScript的对象表示法，是一种轻量级的文本数据交换格式。
+作用">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Android开发：XML简介及DOM、SAX、PULL解析对比 | Hexo</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">戴小冲</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/dzs88365" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/dai-nai-chong/activities" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">戴小冲</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">戴小冲</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/dzs88365" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/dai-nai-chong/activities" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Android开发：XML简介及DOM、SAX、PULL解析对比" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/" class="article-date">
+      <time datetime="2016-03-12T06:17:37.000Z" itemprop="datePublished">2016-03-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android开发：XML简介及DOM、SAX、PULL解析对比
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>定义</p>
+<p>JavaScript Object Notation，JavaScript的对象表示法，是一种轻量级的文本数据交换格式。</p>
+<p>作用<a id="more"></a></p>
+<p>用于数据的标记、存储和传输。</p>
+<p>特点</p>
+<p>轻量级的文本数据交换格式<br>独立于语言和平台<br>具有自我描述性</p>
+<p>读写速度快，解析简单<br>语法</p>
+<p>JSON值</p>
+<p>名称/值<br>数组<br>对象<br>JSON实例</p>
+<p>｛”skill”:{<br>          “web”:[<br>                 {<br>                  “name”:”html”,<br>                  “year”:”5”<br>                 },<br>                 {<br>                  “name”:”ht”,<br>                  “year”:”4”<br>                 }],<br>           “database”:[<br>                  {<br>                  “name”:”h”,<br>                  “year”:”2”<br>                 }]<br>`}}<br>“名称／值”对<br>无序、一个对象用“｛｝”包括，名称和值间用“：”相隔，对象间用“，”隔开；<br>“name”:”html”<br>对象<br>一个JSON对象包括多个名称/值对，在花括号里书写</p>
+<p>{ “name”:”html”,”year”:”5”}<br>数组<br>数组以“［］”包括，数据的对象用逗号隔开</p>
+<pre><code>{
+ &quot;name&quot;:&quot;html&quot;,
+ &quot;year&quot;:&quot;5&quot;
+},
+{
+ &quot;name&quot;:&quot;ht&quot;,
+ &quot;year&quot;:&quot;4&quot;
+}]
+</code></pre><p>web和database都是一个数组</p>
+<p>语法总结</p>
+<p>数组 [ 对象 { 值/对”” } ]</p>
+<p>数组包含对象，对象包含值/对<br>JSON解析</p>
+<p>在了解了JSON后，是时候来看下如何在Android解析JSON数据</p>
+<p>解析方法</p>
+<p>Android解析JSON数据的方法和XML解析类似，主要有两种：<br>基于事件驱动和基于文档驱动解析方式</p>
+<p>基于事件驱动</p>
+<p>主流方式：Gson解析和Jackson解析<br>Gson介绍</p>
+<p>简介：使用谷歌的开源库进行解析<br>解析方式：基于事件驱动，根据所需要取的数据通过建立一个对应于JSON数据的JavaBean类就可以通过简单的操作解析出所需JSON数据<br>Gson解析</p>
+<p>步骤1：创建一个与JSON数据对应的JavaBean类（用作存储需要解析的数据）<br>GSON解析的关键是重点是要根据json数据里面的结构写出一个对应的javaBean，规则是：</p>
+<p>JSON的大括号对应一个对象，对象里面有key和value(值)。在JavaBean里面的类属性要和key同名。<br>JSON的方括号对应一个数组，所以在JavaBeanBean里面对应的也是数组，数据里面可以有值或者对象。<br>如果数组里面只有值没有key，就说明它只是一个纯数组，如果里面有值有key，则说明是对象数组。纯数组对应JavaBean里面的数组类型，对象数组要在Bean里面建立一个内部类，类属性就是对应的对象里面的key，建立了之后要创建一个这个内部类的对象，名字对应数组名。<br>对象里面嵌套对象时候，也要建立一个内部类，和对象数组一样，这个内部类对象的名字就是父对象的key<br>注：JavaBean类里的属性不一定要全部和JSON数据里的所有key相同，可以按需取数据，也就是你想要哪种数据，就把对应的key属性写出来，注意名字一定要对应</p>
+<p>以下有两个JSON文档来说明创建JavaBean类的创建方法</p>
+<p>简单的JSON数据1（对象）</p>
+<p>String json = “{\”id\”:1,\”name\”:\”小明\”,\”sex\”:\”男\”,\”age\”:18,\”height\”:175}”;<br>步骤1：创建简单的JSON数据对应的JavaBean类</p>
+<p>package scut.learngson;</p>
+<p>public class EntityStudent {<br>    private int id;<br>    private String name;<br>    private String sex;<br>    private int age;<br>    private int height;</p>
+<pre><code>public void setId(int id){
+    this.id = id;
+}
+public void setName(String name){
+    this.name = name;
+}
+public void setSex(String sex){
+    this.sex = sex;
+}
+public void setAge(int age){
+    this.age = age;
+}
+public void setHeight(int height){
+    this.height = height;
+}
+public int getId(){
+    return id;
+}
+public String getName(){
+    return name;
+}
+public String getSex(){
+    return sex;
+}
+public int getAge(){
+    return age;
+}
+public int getHeight(){
+    return  height;
+}
+public void show(){
+            System.out.print(&quot;id=&quot; + id + &quot;,&quot;);
+            System.out.print(&quot;name=&quot; + name+&quot;,&quot;);
+            System.out.print(&quot;sex=&quot; + sex+&quot;,&quot;);
+            System.out.print(&quot;age=&quot; + age+&quot;,&quot;);
+            System.out.println(&quot;height=&quot; + height + &quot;,&quot;);
+
+}
+</code></pre><p>}<br>复杂的JSON数据（具备嵌套）</p>
+<p>{“translation”:[“车”],<br>  “basic”:<br>    {<br>      “phonetic”:”kɑː”,<br>      “explains”:[“n. 汽车；车厢”,”n. (Car)人名；(土)贾尔；(法、西)卡尔；(塞)察尔”]},<br>  “query”:”car”,<br>  “errorCode”:0,<br>  “web”:[{“value”:[“汽车”,”车子”,”小汽车”],”key”:”Car”},<br>         {“value”:[“概念车”,”概念车”,”概念汽车”],”key”:”concept car”},<br>         {“value”:[“碰碰车”,”碰撞用汽车”,”碰碰汽车”],”key”:”bumper car”}]<br>}<br>步骤1：复杂的JSON数据对应的JavaBean类</p>
+<p>package scut.httpgson;<br>import java.util.List;</p>
+<p>public class student {<br>    public String[] translation;      //[“车”]数组<br>    public basic basic;                //basic对象里面嵌套着对象，创建一个basic内部类对象<br>    public  static class basic{        //建立内部类<br>        public String phonetic;<br>        public String[] explains;<br>    }<br>    public String query;<br>    public int errorCode;<br>    public List<wb> web;            //web是一个对象数组，创建一个web内部类对象<br>    public static class wb{<br>            public String[] value;<br>            public String key;<br>        }</wb></p>
+<pre><code>public void show(){
+    //输出数组
+    for (int i = 0;i&lt;translation.length;i++)
+    {
+    System.out.println(translation[i]);
+    }
+    //输出内部类对象
+    System.out.println(basic.phonetic);
+    //输出内部类数组
+    for (int i = 0;i&lt;basic.explains.length;i++){
+        System.out.println(basic.explains[i]);
+    }
+    System.out.println(query);
+    System.out.println(errorCode);
+    for (int i = 0;i&lt;web.size();i++){
+        for(int j = 0; j&lt;web.get(i).value.length;j++)
+        {
+            System.out.println(web.get(i).value[j]);
+        }
+        System.out.println(web.get(i).key);
+    }
+}
+}
+</code></pre><p>好了，是不是觉得根据JSON文本数据去转换成JavaBean实体类很复杂呢？其实还有个简单的方法，请使用在线JSON字符串转Java实体类，哈哈请不要打我，继续往下看吧！<br>步骤2：下载并导入GSON需要的库</p>
+<p>别翻墙去谷歌官网下了，点这吧</p>
+<p>步骤3：用Gson进行转换</p>
+<p>package scut.learngson;</p>
+<p>import android.os.Bundle;<br>import android.support.v7.app.AppCompatActivity;<br>import com.google.gson.Gson;</p>
+<p>import org.json.JSONArray;<br>import org.json.JSONException;<br>import org.json.JSONObject;</p>
+<p>import java.io.BufferedReader;<br>import java.io.IOException;<br>import java.io.InputStream;<br>import java.io.InputStreamReader;</p>
+<p>public class MainActivity extends AppCompatActivity {</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Gson gson = new Gson();
+    //创建JavaBean类的对象
+  Student student = new EntityStudent();
+    String json = &quot;{\&quot;id\&quot;:1,\&quot;name\&quot;:\&quot;小明\&quot;,\&quot;sex\&quot;:\&quot;男\&quot;,\&quot;age\&quot;:18,\&quot;height\&quot;:175}&quot;;
+   //用GSON方法将JSON数据转为单个类实体
+    student = gson.fromJson(json,Student.class);
+   //调用student方法展示解析的数据
+    student.show();
+  //将Java集合转换为json
+    String json2 = gson.toJson(List);        System.out.println(json2);
+}
+</code></pre><p>}<br>总结</p>
+<p>可以看到，利用GSON方法进行解析，关键在于根据json数据里面的结构写出一个对应的javaBean，而解析过程非常简单：</p>
+<p>JavaBean对象 = gson.fromJson(son,javaBean类类名.class);<br>Jackson解析</p>
+<p>解析原理：基于事件驱动，与GSON相同，先创建一个对应于JSON数据的JavaBean类就可以通过简单的操作解析出所需JSON数据。但和Gson解析不同的是，GSON可按需解析，即创建的JavaBean类不一定完全涵盖所要解析的JSON数据，按需创建属性，但Jackson解析对应的JavaBean必须把Json数据里面的所有key都有所对应，即必须把JSON内的数据所有解析出来，无法按需解析。但Jackson的解析速度和效率都要比GSON高</p>
+<p>核心代码</p>
+<p>JSON数据</p>
+<p>{“student”:<br>          [<br>           {“id”:1,”name”:”小明”,”sex”:”男”,”age”:18,”height”:175,”date”:[2013,8,11]},<br>           {“id”:2,”name”:”小红”,”sex”:”女”,”age”:19,”height”:165,”date”:[2013,8,23]},<br>           {“id”:3,”name”:”小强”,”sex”:”男”,”age”:20,”height”:185,”date”:[2013,9,1]}<br>          ],<br>  “grade”:”2”<br>}<br>步骤1：建立对应的javaBean：</p>
+<p>建立javaBean的对应规则和GSON一样</p>
+<p>package scut.learnjackson;</p>
+<p>import java.util.ArrayList;<br>import java.util.List;<br>class test {<br>    private  List<stu> student = new ArrayList<stu>();</stu></stu></p>
+<pre><code>private  int grade;
+
+public void setStudent(List&lt;stu&gt; student){
+    this.student = student;
+}
+public List&lt;stu&gt; getStudent(){
+    return student;
+}
+public void setGrade(int grade){
+    this.grade = grade;
+}
+public int getGrade(){
+    return grade;
+}
+private static class stu {
+    private  int id;
+    private  String name;
+    private  String sex;
+    private  int age;
+    private  int height;
+    private  int[] date;
+
+    public void setId(int id){
+        this.id = id;
+    }
+    public int getId(){
+        return id;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return  name;
+    }
+    public void setSex(String sex){
+        this.sex = sex;
+    }
+    public String getSex(){
+        return sex;
+    }
+    public void  setAge(int age){
+        this.age = age;
+    }
+    public int getAge(){
+        return age;
+    }
+    public void setHeight(int height){
+        this.height = height;
+    }
+    public int getHeight(){
+        return height;
+    }
+    public void setDate(int[] date){
+        this.date = date;
+    }
+    public int[] getDate(){
+        return date;
+    }
+}
+
+public String tostring(){
+    String str = &quot;&quot;;
+    for (int i = 0;i&lt;student.size();i++){
+        str += student.get(i).getId() + &quot; &quot; + student.get(i).getName() + &quot; &quot; + student.get(i).getSex() + &quot; &quot; + student.get(i).getAge() + &quot; &quot; + student.get(i).getHeight() ;
+        for (int j = 0;j&lt;student.get(i).getDate().length;j++) {
+            str += student.get(i).getDate()[j]+ &quot; &quot; ;
+        }
+        str += &quot;\n&quot;;
+    }
+    str += &quot;\n&quot;+getGrade();
+    return str;
+}
+</code></pre><p>}<br>步骤2：利用Jackson方法进行解析</p>
+<p>package scut.learnjackson;</p>
+<p>import android.os.Bundle;<br>import android.support.v7.app.AppCompatActivity;<br>import org.codehaus.jackson.map.ObjectMapper;<br>import java.io.BufferedReader;<br>import java.io.IOException;<br>import java.io.InputStreamReader;</p>
+<p>public class MainActivity extends AppCompatActivity {<br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        ObjectMapper objectMapper = new ObjectMapper();<br>        try {<br>            InputStreamReader isr = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(“assets/“ + “student.json”),”utf-8”);<br>            //从assets获取json文件<br>            BufferedReader bfr = new BufferedReader(isr);<br>            String line;<br>            StringBuilder stringBuilder = new StringBuilder();<br>            while ((line = bfr.readLine())!=null){<br>                stringBuilder.append(line);<br>            }//将JSON数据转化为字符串<br>            System.out.println(stringBuilder.toString());<br>            System.out.println(tes.tostring());</p>
+<pre><code>    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+}
+</code></pre><p>}<br>基于文档驱动解析方式</p>
+<p>主流方式：Android Studio自带org.json解析<br>解析方式：基于文档驱动，类似于XML的DOM解析方法，先把全部文件读入到内存中，然后遍历所有数据，然后根据需要检索想要的数据。<br>需要解析的JSON数据：</p>
+<p>{<br>“student”:[<br>               {“id”:1,”name”:”小明”,”sex”:”男”,”age”:18,”height”:175},<br>              {“id”:2,”name”:”小红”,”sex”:”女”,”age”:19,”height”:165},<br>               {“id”:3,”name”:”小强”,”sex”:”男”,”age”:20,”height”:185}<br>            ],<br>“cat”:”it”<br>}<br>读入本地assets文件夹里面的student.son并解析</p>
+<p>package scut.learngson;</p>
+<p>import android.os.Bundle;<br>import org.json.JSONArray;<br>import org.json.JSONException;<br>import org.json.JSONObject;</p>
+<p>import java.io.BufferedReader;<br>import java.io.IOException;<br>import java.io.InputStream;<br>import java.io.InputStreamReader;</p>
+<p>public class MainActivity extends AppCompatActivity {</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    EntityStudent student = new EntityStudent();
+
+
+    try {
+        //从assets获取json文件
+        InputStreamReader isr = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(&quot;assets/&quot; + &quot;student.json&quot;));
+        //字节流转字符流
+       BufferedReader bfr = new BufferedReader(isr);
+        String line ;
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((line = bfr.readLine())!=null){
+            stringBuilder.append(line);
+        }//将JSON数据转化为字符串
+        JSONObject root = new JSONObject(stringBuilder.toString());
+        //根据键名获取键值信息
+        System.out.println(&quot;root:&quot;+root.getString(&quot;cat&quot;));
+        JSONArray array = root.getJSONArray(&quot;student&quot;);
+        for (int i = 0;i &lt; array.length();i++)
+        {
+            JSONObject stud = array.getJSONObject(i);
+            System.out.println(&quot;------------------&quot;);
+            System.out.print(&quot;id=&quot;+stud.getInt(&quot;id&quot;)+ &quot;,&quot;));
+            System.out.print(&quot;name=&quot;+stud.getString(&quot;name&quot;)+ &quot;,&quot;));
+            System.out.print(&quot;sex=&quot;+stud.getString(&quot;sex&quot;)+ &quot;,&quot;));
+            System.out.print(&quot;age=&quot;+stud.getInt(&quot;age&quot;)+ &quot;,&quot;));
+            System.out.println(&quot;height=&quot;+stud.getInt(&quot;height&quot;)+ &quot;,&quot;));
+            bfr.close();
+                isr.close();
+            is.close();//依次关闭流
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+
+}
+</code></pre><p>}<br>GSON、Jackson、Android Studio自带org.son解析三类方式对比</p>
+<p>Android Studio自带org.json</p>
+<p>原理：基于文档驱动<br>特点：<br>优点：无<br>缺点：解析 XML 文件时会将整个 XML 文件的内容解析成树型结构存放在内存中并创建新对象，比较消耗时间和内存,解析速度和效率慢，解析方式和性能完败GSON<br>GSON方式</p>
+<p>原理：基于事件驱动<br>特点：<br>优点：解析方法简单、解析效率高、占存少、灵活性高<br>使用情境<br>适用于需要处理大型 JSON文档、JSON文档结构复杂的场合<br>Jackson方式</p>
+<p>原理：基于事件驱动<br>特点：<br>优点：解析效率最高、在数据量大的情况优势尤为明显、占存少<br>缺点：必须完全解析文档，如果要按需解析的话可以拆分Json来读取，操作和解析方法复杂；<br>使用情境<br>适用于需要处理超大型JSON文档、不需要对JSON文档进行按需解析、、性能要求较高的场合<br>与XML解析对比</p>
+<p>对于同样作为主流的数据交换格式来说，JSON相比于XML，JSON文档大小更加小，解析方法更加简单、读写速度更快，所以JSON一定是你在数据交换格式的选型中的首选。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/">Android开发：XML简介及DOM、SAX、PULL解析对比</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">戴小冲</a></p>
+        <p><span>发布时间:</span>2016-03-12, 14:17:37</p>
+        <p><span>最后更新:</span>2017-02-04, 14:19:36</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/" title="Android开发：XML简介及DOM、SAX、PULL解析对比">http://yoursite.com/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/　　作者: 戴小冲" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/01/05/ListView与Recycler区别/">
+                    ListView与Recycler区别
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Android开发：XML简介及DOM、SAX、PULL解析对比　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/01/05/ListView与Recycler区别/" title="下一篇: ListView与Recycler区别">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/12/Android开发：XML简介及DOM、SAX、PULL解析对比/">Android开发：XML简介及DOM、SAX、PULL解析对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/05/ListView与Recycler区别/">ListView与Recycler区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/03/Looper、Handler、MessageQueue-Message作用和存在的意义？/">Looper、Handler、MessageQueue,Message作用和存在的意义？</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/04/android的消息机制——Handler机制/">android的消息机制——Handler机制</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 戴小冲
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
